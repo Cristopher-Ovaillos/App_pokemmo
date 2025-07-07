@@ -1,0 +1,110 @@
+Segui los pasos de:
+https://www.youtube.com/watch?v=WPIuGIAD4hY 
+
+1.Carga progresiva dinamica: lazy loading
+1.1: http://localhost:5000/images/pokemons/1.png
+1.1.2: https://youtube.com/shorts/3O6BFlOiFRg?si=2fC6NeutXlIYgV2D Visualizer
+2. 
+DATABASES
+
+-- Base de datos para Pokédex / PokeMMO profesional
+
+CREATE DATABASE IF NOT EXISTS pokedex;
+USE pokedex;
+
+-- Tabla usuarios
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  password VARCHAR(100) NOT NULL
+);
+
+-- Tabla equipos
+CREATE TABLE IF NOT EXISTS teams (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Tabla pokemones (datos base)
+CREATE TABLE IF NOT EXISTS pokemons (
+  id INT PRIMARY KEY,
+  name VARCHAR(50),
+  sprite_url TEXT,
+  type1 VARCHAR(20),
+  type2 VARCHAR(20),
+  base_hp INT,
+  base_atk INT,
+  base_def INT,
+  base_sp_atk INT,
+  base_sp_def INT,
+  base_speed INT
+);
+
+-- Tabla naturalezas
+CREATE TABLE IF NOT EXISTS natures (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(30),
+  increased_stat VARCHAR(30),
+  decreased_stat VARCHAR(30)
+);
+
+-- Tabla movimientos
+CREATE TABLE IF NOT EXISTS moves (
+  id INT PRIMARY KEY,
+  name VARCHAR(50),
+  type VARCHAR(20),
+  power INT,
+  accuracy INT,
+  pp INT,
+  damage_class VARCHAR(20)
+);
+
+-- Relación Pokémon - Movimientos que puede aprender
+CREATE TABLE IF NOT EXISTS pokemon_moves (
+  pokemon_id INT,
+  move_id INT,
+  method VARCHAR(30), -- ej. level-up, tm, tutor
+  level_learned INT,
+  FOREIGN KEY (pokemon_id) REFERENCES pokemons(id) ON DELETE CASCADE,
+  FOREIGN KEY (move_id) REFERENCES moves(id) ON DELETE CASCADE,
+  PRIMARY KEY (pokemon_id, move_id, method)
+);
+
+-- Pokémon asignados a equipos
+CREATE TABLE IF NOT EXISTS team_pokemons (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  team_id INT NOT NULL,
+  pokemon_id INT NOT NULL,
+  nickname VARCHAR(50),
+  nature_id INT,
+  iv_hp INT DEFAULT 31,
+  iv_atk INT DEFAULT 31,
+  iv_def INT DEFAULT 31,
+  iv_sp_atk INT DEFAULT 31,
+  iv_sp_def INT DEFAULT 31,
+  iv_speed INT DEFAULT 31,
+  ev_hp INT DEFAULT 0,
+  ev_atk INT DEFAULT 0,
+  ev_def INT DEFAULT 0,
+  ev_sp_atk INT DEFAULT 0,
+  ev_sp_def INT DEFAULT 0,
+  ev_speed INT DEFAULT 0,
+  FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE,
+  FOREIGN KEY (pokemon_id) REFERENCES pokemons(id),
+  FOREIGN KEY (nature_id) REFERENCES natures(id)
+);
+
+-- Movimientos asignados a cada Pokémon de un equipo
+CREATE TABLE IF NOT EXISTS team_pokemon_moves (
+  team_pokemon_id INT,
+  move_id INT,
+  slot INT, -- 1 a 4
+  FOREIGN KEY (team_pokemon_id) REFERENCES team_pokemons(id) ON DELETE CASCADE,
+  FOREIGN KEY (move_id) REFERENCES moves(id),
+  PRIMARY KEY (team_pokemon_id, slot)
+);
+
+
+
