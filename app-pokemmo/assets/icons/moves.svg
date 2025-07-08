@@ -1,9 +1,0 @@
-<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-	<title>moves</title>
-	<defs>
-		<image  width="23" height="19" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAATCAMAAABMZWaEAAAAAXNSR0IB2cksfwAAAEhQTFRFAAAAAAAA////8fHx8/PzCAgIMzMzPT09Dg4Ourq6wsLC9fX1CQkJDAwMBQUFCgoKBgYGMjIyR0dHwcHBrKysvr6+9/f38vLye/IpXAAAABh0Uk5TAP//////////////////////////////6dxENgAAAH5JREFUeJx1j8EOAiEMBRkVL67xtP//gXswJuJhE61CA7REeiCdKXkUQi3yIY5MI4Nvc3HcdB0YjzrvD3yCZBDnI7D/uR9P8NIo58NC0kf9PrnBaLPg5L9D0fa2SjTWDZQhXOFhgwvDJfI8p+6V4XiD+7t75V/+imw2v/Bsny9mPC8XKsdoxgAAAABJRU5ErkJggg=="/>
-	</defs>
-	<style>
-	</style>
-	<use id="Background" href="#img1" x="4" y="5"/>
-</svg>
