@@ -2,7 +2,7 @@
 
 Una aplicación móvil para gestionar equipos Pokémon desarrollada con React Native, Node.js, Express y MySQL.
 
-<img src="https://i.postimg.cc/63vwxDs5/mer.png" width="300" alt="mer"/>
+<img src="https://i.postimg.cc/63vwxDs5/mer.png" width="700" alt="mer"/>
 
 
 
