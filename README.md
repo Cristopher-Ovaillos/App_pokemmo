@@ -2,6 +2,9 @@
 
 Una aplicación móvil para gestionar equipos Pokémon desarrollada con React Native, Node.js, Express y MySQL.
 
+![PokéMMO App Screenshot](https://www.pokemon.com/el/pokedex/piplup.png)
+
+
 ## 🛠️ Tecnologías Utilizadas
 
 <div align="center">
