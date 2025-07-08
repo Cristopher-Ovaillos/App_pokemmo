@@ -1,24 +1,23 @@
 export default {
   mode: 'dark',
-  background: '#1a1a2e',
-  surface: '#16213e',
-  text: '#ffffff',
-  textSecondary: '#cccccc',
-  card: '#16213e',
-  border: '#333333',
-  primary: '#00ff00',      // Verde 
-  secondary: '#ff6b00',    // Naranja
-  accent: '#ff0066',       // Rosa
-  warning: '#ffff00',      // Amarillo
-  error: '#ff0000',        // Rojo
-  success: '#00ff00',      // Verde
-  shadow: '#000000',       // Negro 
+  background: '#101820',   // Azul muy oscuro
+  surface: '#202840',      // Azul oscuro-grisáceo
+  text: '#E0E8F0',         // Blanco azulado
+  textSecondary: '#9098A8',// Gris azulado
+  card: '#202840',         // Azul oscuro-grisáceo
+  border: '#404858',       // Borde azulado
+  primary: '#39FF14',      // Verde fluorescente
+  secondary: '#F07888',    // Rosa/Rojo neón
+  accent: '#39FF14',       // Verde fluorescente
+  warning: '#F8D860',      // Amarillo neón
+  error: '#E06060',        // Rojo neón
+  success: '#39FF14',       // Verde fluorescente
+  shadow: '#000000',       // Negro
   gradients: {
-    header: ['#ff6b00', '#ff8c00', '#ffa500'],
-    background: ['#1a1a2e', '#16213e', '#0f3460'],
-    button: ['#00ff00', '#00cc00'],
+    header: ['#39FF14', '#4FFF2A'],
+    background: ['#101820', '#182028'],
+    button: ['#39FF14', '#28E00A'],
   },
-
   fonts: {
     primary: 'PressStart2P',
     regular: 'PixelifySans-Regular',

@@ -1,6 +1,6 @@
 Segui los pasos de:
 https://www.youtube.com/watch?v=WPIuGIAD4hY 
-
+Hacer: 
 1.Carga progresiva dinamica: lazy loading
 1.1: http://localhost:5000/images/pokemons/1.png
 1.1.2: https://youtube.com/shorts/3O6BFlOiFRg?si=2fC6NeutXlIYgV2D Visualizer

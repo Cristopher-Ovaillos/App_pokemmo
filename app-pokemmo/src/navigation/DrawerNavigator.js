@@ -1,5 +1,5 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { useTheme } from "../theme/themecontext";
 
@@ -9,6 +9,11 @@ import PokedexScreen from "../screen/PokedexScreen";
 import ProfileScreen from "../screen/ProfileScreen";
 import TeamScreen from "../screen/TeamScreen";
 
+import HomeIcon from "../../assets/svg/home";
+import PokedexIcon from "../../assets/svg/pokedex";
+import MovesIcon from "../../assets/svg/moves";
+import TeamIcon from "../../assets/svg/team";
+import ProfileIcon from "../../assets/svg/profile"
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = ({ navigation, state }) => {
@@ -19,51 +24,49 @@ const CustomDrawerContent = ({ navigation, state }) => {
       name: "Inicio",
       screen: "Home",
       color: theme.primary,
-      image: require('../../assets/icons/home.png'),
+      icon: HomeIcon,
     },
     {
       name: "Pokedex",
       screen: "Pokedex",
       color: theme.secondary,
-      image: require('../../assets/icons/pokedex.png'),
+      icon: PokedexIcon,
     },
     {
       name: "Equipo",
       screen: "Team",
       color: theme.accent,
-      image: require('../../assets/icons/home.png'),
+      icon: TeamIcon,
     },
     {
       name: "Movimientos",
       screen: "Moves",
       color: theme.warning,
-      image: require('../../assets/icons/moves.svg'),
+      icon: MovesIcon,
     },
     {
       name: "Perfil",
       screen: "Profile",
       color: theme.success,
-      image: require('../../assets/icons/home.png'),
+      icon: ProfileIcon,
     },
   ];
 
   return (
-    
     <View
       style={[styles.drawerContainer, { backgroundColor: theme.background }]}
     >
-     
       <View
         style={[
           styles.drawerHeader,
-          { backgroundColor: theme.primary, borderColor: theme.border },
+          { backgroundColor: theme.primary, borderColor: theme.text },
         ]}
       >
-        <Text style={[styles.headerTitle, { fontFamily: theme.fonts.primary }]}>
+        <Text style={[styles.headerTitle, { color: theme.surface, fontFamily: theme.fonts.primary }]}>
           POKEMMO
         </Text>
         <Text
-          style={[styles.headerSubtitle, { fontFamily: theme.fonts.regular }]}
+          style={[styles.headerSubtitle, { color: theme.surface, fontFamily: theme.fonts.bold }]}
         >
           GBA Edition
         </Text>
@@ -72,14 +75,14 @@ const CustomDrawerContent = ({ navigation, state }) => {
       <TouchableOpacity
         style={[
           styles.themeButton,
-          { borderColor: theme.border, backgroundColor: theme.surface },
+          { borderColor: theme.text, backgroundColor: theme.surface },
         ]}
         onPress={toggleTheme}
       >
         <Text
           style={[
             styles.themeButtonText,
-            { color: theme.text, fontFamily: theme.fonts.regular },
+            { color: theme.text, fontFamily: theme.fonts.bold },
           ]}
         >
           Modo: {theme.mode === "dark" ? "Oscuro" : "Claro"}
@@ -96,21 +99,24 @@ const CustomDrawerContent = ({ navigation, state }) => {
                 styles.menuItem,
                 {
                   borderColor: isActive ? item.color : theme.border,
-                  backgroundColor: isActive ? item.color + "20" : theme.surface,
+                  backgroundColor: isActive ? item.color + "33" : theme.surface,
                 },
               ]}
               onPress={() => navigation.navigate(item.screen)}
             >
               <View style={styles.menuItemContent}>
-                {/*aca poner la imagen */}
-                <Image source={item.image} style={{ width: 32, height: 32 }} />
+                <item.icon 
+                  color={isActive ? item.color : theme.text} 
+                  size={28} 
+                />
 
                 <Text
                   style={[
                     styles.menuText,
                     {
                       color: isActive ? item.color : theme.text,
-                      fontFamily: theme.fonts.regular,
+                      fontFamily: theme.fonts.bold,
+                      marginLeft: 15,
                     },
                   ]}
                 >
@@ -125,30 +131,30 @@ const CustomDrawerContent = ({ navigation, state }) => {
       <View style={styles.drawerFooter}>
         <View
           style={[
-            styles.pixelBorder,
-            { borderColor: theme.primary, backgroundColor: theme.surface },
+            styles.footerBox,
+            { borderColor: theme.text, backgroundColor: theme.surface },
           ]}
         >
           <Text
             style={[
-              styles.footerText,
-              { color: theme.primary, fontFamily: theme.fonts.primary },
+              styles.footerTitle,
+              { color: theme.text, fontFamily: theme.fonts.primary },
             ]}
           >
             Integrantes:
           </Text>
           <Text
             style={[
-              styles.footerText,
-              { color: theme.primary, fontFamily: theme.fonts.primary },
+              styles.footerName,
+              { color: theme.text, fontFamily: theme.fonts.regular },
             ]}
           >
             Guillermo Diaz
           </Text>
           <Text
             style={[
-              styles.footerText,
-              { color: theme.primary, fontFamily: theme.fonts.primary },
+              styles.footerName,
+              { color: theme.text, fontFamily: theme.fonts.regular },
             ]}
           >
             Cristopher Ovaillos
@@ -174,7 +180,7 @@ const DrawerNavigator = () => {
         headerTintColor: theme.primary,
         headerTitleStyle: {
           fontFamily: theme.fonts.primary,
-          fontSize: 14,
+          fontSize: 16,
         },
         drawerStyle: {
           backgroundColor: "transparent",
@@ -216,73 +222,70 @@ const DrawerNavigator = () => {
 const styles = StyleSheet.create({
   drawerContainer: {
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 40,
   },
   drawerHeader: {
-    height: 100,
+    padding: 15,
     marginBottom: 20,
     marginHorizontal: 10,
-    borderRadius: 8,
-    borderWidth: 2,
+    borderWidth: 4,
     justifyContent: "center",
     alignItems: "center",
   },
   headerTitle: {
-    fontSize: 16,
-    color: "#000",
+    fontSize: 22,
+    textAlign: 'center',
   },
   headerSubtitle: {
-    fontSize: 12,
-    color: "#000",
+    fontSize: 14,
     marginTop: 5,
   },
   themeButton: {
     marginHorizontal: 10,
     marginBottom: 20,
-    borderRadius: 8,
     borderWidth: 2,
-    padding: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
     alignItems: "center",
   },
   themeButtonText: {
     fontSize: 14,
+    textTransform: 'uppercase',
   },
   menuContainer: {
     flex: 1,
     paddingHorizontal: 10,
   },
   menuItem: {
-    marginVertical: 5,
-    borderRadius: 8,
+    marginVertical: 4,
     borderWidth: 2,
   },
   menuItemContent: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 15,
-  },
-  iconPlaceholder: {
-    width: 24,
-    height: 24,
-    borderRadius: 4,
-    marginRight: 15,
+    padding: 12,
   },
   menuText: {
-    marginLeft:5,
-    fontSize: 16,
+    fontSize: 18,
   },
   drawerFooter: {
-    padding: 20,
-    marginBottom: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
     alignItems: "center",
   },
-  pixelBorder: {
+  footerBox: {
     borderWidth: 2,
-    borderRadius: 5,
     padding: 10,
+    alignItems: 'center',
+    width: '100%',
   },
-  footerText: {
+  footerTitle: {
+    fontSize: 12,
+    marginBottom: 8,
+  },
+  footerName: {
     fontSize: 10,
+    lineHeight: 14,
   },
 });
 
