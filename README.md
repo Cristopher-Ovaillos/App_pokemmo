@@ -194,11 +194,3 @@ expo build:ios
 - 🔒 **Seguridad**: No subas el archivo `.env` al repositorio
 - 📊 **Base de datos**: Los archivos SQL deben importarse en el orden especificado
 
-## 🤝 Contribuir
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
