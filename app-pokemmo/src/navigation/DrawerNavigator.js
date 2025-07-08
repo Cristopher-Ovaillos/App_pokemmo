@@ -14,6 +14,8 @@ import PokedexIcon from "../../assets/svg/pokedex";
 import MovesIcon from "../../assets/svg/moves";
 import TeamIcon from "../../assets/svg/team";
 import ProfileIcon from "../../assets/svg/profile"
+import BackgroundPattern from "../../assets/svg/Background";
+import HeaderBackground from "../../assets/svg/headerbackground";
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = ({ navigation, state }) => {
@@ -56,17 +58,22 @@ const CustomDrawerContent = ({ navigation, state }) => {
     <View
       style={[styles.drawerContainer, { backgroundColor: theme.background }]}
     >
+      <BackgroundPattern />
       <View
         style={[
           styles.drawerHeader,
           { backgroundColor: theme.primary, borderColor: theme.text },
         ]}
       >
-        <Text style={[styles.headerTitle, { color: theme.surface, fontFamily: theme.fonts.primary }]}>
+        {/* con AbsoluteFillObjet para que no sea centrado*/}
+        <View style={StyleSheet.absoluteFillObject}>
+          <HeaderBackground />
+        </View>
+        <Text style={[styles.headerTitle, { color: theme.surface, fontFamily: theme.fonts.primary, zIndex: 1 }]}>
           POKEMMO
         </Text>
         <Text
-          style={[styles.headerSubtitle, { color: theme.surface, fontFamily: theme.fonts.bold }]}
+          style={[styles.headerSubtitle, { color: theme.surface, fontFamily: theme.fonts.bold, zIndex: 1 }]}
         >
           GBA Edition
         </Text>
@@ -225,12 +232,14 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   drawerHeader: {
-    padding: 15,
+    paddingVertical: 12,
     marginBottom: 20,
     marginHorizontal: 10,
     borderWidth: 4,
     justifyContent: "center",
     alignItems: "center",
+    position: "relative",
+    overflow: "hidden",
   },
   headerTitle: {
     fontSize: 22,
