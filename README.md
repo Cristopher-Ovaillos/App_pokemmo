@@ -157,6 +157,7 @@ npm run dev
 ```
 
 ### Frontend
+   - Cambiar IP con ayuda de CMD "ipconfig"
 ```bash
 # Iniciar aplicación
 cd app-pokemmo
