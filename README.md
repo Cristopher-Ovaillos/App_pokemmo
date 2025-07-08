@@ -50,7 +50,7 @@ Antes de comenzar, asegúrate de tener instalado:
 ### 1. 📥 Clonar el Repositorio
 
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/Cristopher-Ovaillos/App_pokemmo.git
 cd Aplicacion_Movil
 ```
 
