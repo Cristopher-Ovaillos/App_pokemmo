@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   mapImage: {
     width: '100%',
     height: 500,
-    resizeMode: 'contain',
+    contentFit: 'contain',
     marginBottom:0,
     borderWidth: 0,
   },

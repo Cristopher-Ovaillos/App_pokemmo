@@ -1,4 +1,5 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import React, { useContext } from "react";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, Text, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { useTheme } from "../theme/themecontext";
@@ -16,11 +17,13 @@ import TeamIcon from "../../assets/svg/team";
 import ProfileIcon from "../../assets/svg/profile"
 import BackgroundPattern from "../../assets/svg/Background";
 import HeaderBackground from "../../assets/svg/headerbackground";
+import { AuthContext } from "../context/AuthContext";
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = ({ navigation, state }) => {
   const { theme, toggleTheme } = useTheme();
-
+  const { user, signOut } = useContext(AuthContext);
+  
   const menuItems = [
     {
       name: "Inicio",
@@ -45,12 +48,6 @@ const CustomDrawerContent = ({ navigation, state }) => {
       screen: "Moves",
       color: theme.warning,
       icon: MovesIcon,
-    },
-    {
-      name: "Perfil",
-      screen: "Profile",
-      color: theme.success,
-      icon: ProfileIcon,
     },
   ];
 
@@ -133,6 +130,29 @@ const CustomDrawerContent = ({ navigation, state }) => {
             </TouchableOpacity>
           );
         })}
+        {user && (
+          <TouchableOpacity
+            key="Perfil"
+            style={[
+              styles.menuItem,
+              {
+                borderColor: state.routes[state.index]?.name === 'Profile' ? theme.success : theme.border,
+                backgroundColor: state.routes[state.index]?.name === 'Profile' ? theme.success + "33" : theme.surface,
+              },
+            ]}
+            onPress={() => navigation.navigate('Profile')}
+          >
+            <View style={styles.menuItemContent}>
+              <ProfileIcon
+                color={state.routes[state.index]?.name === 'Profile' ? theme.success : theme.text}
+                size={28}
+              />
+              <Text style={[styles.menuText, { color: state.routes[state.index]?.name === 'Profile' ? theme.success : theme.text, fontFamily: theme.fonts.bold, marginLeft: 15 }]}>
+                Perfil
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
 
       <View style={styles.drawerFooter}>
@@ -142,6 +162,28 @@ const CustomDrawerContent = ({ navigation, state }) => {
             { borderColor: theme.text, backgroundColor: theme.surface },
           ]}
         >
+          {user ? (
+            <TouchableOpacity style={styles.authButton} onPress={signOut}>
+              <Text style={[styles.authButtonText, { color: theme.text, fontFamily: theme.fonts.bold }]}>
+                Cerrar Sesión
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <>
+              <TouchableOpacity style={styles.authButton} onPress={() => navigation.navigate('Login')}>
+                <Text style={[styles.authButtonText, { color: theme.text, fontFamily: theme.fonts.bold }]}>
+                  Iniciar Sesión
+                </Text>
+              </TouchableOpacity>
+              <View style={[styles.authSeparator, { backgroundColor: theme.border }]} />
+              <TouchableOpacity style={styles.authButton} onPress={() => navigation.navigate('Register')}>
+                <Text style={[styles.authButtonText, { color: theme.text, fontFamily: theme.fonts.bold }]}>
+                  Registrarse
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
+          <View style={[styles.footerSeparator, { backgroundColor: theme.border }]} />
           <Text
             style={[
               styles.footerTitle,
@@ -174,6 +216,7 @@ const CustomDrawerContent = ({ navigation, state }) => {
 
 const DrawerNavigator = () => {
   const { theme } = useTheme();
+  const { user } = useContext(AuthContext);
 
   return (
     <Drawer.Navigator
@@ -217,11 +260,13 @@ const DrawerNavigator = () => {
         component={MovesScreen}
         options={{ title: "MOVIMIENTOS" }}
       />
-      <Drawer.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{ title: "PERFIL" }}
-      />
+      {user && (
+        <Drawer.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{ title: "PERFIL" }}
+        />
+      )}
     </Drawer.Navigator>
   );
 };
@@ -287,6 +332,24 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     width: '100%',
+    flexDirection: 'column',
+  },
+  authButton: {
+    paddingVertical: 8,
+  },
+  authButtonText: {
+    fontSize: 14,
+    textTransform: 'uppercase',
+  },
+  authSeparator: {
+    height: 1,
+    width: '80%',
+    marginVertical: 8,
+  },
+  footerSeparator: {
+    height: 2,
+    width: '100%',
+    marginVertical: 10,
   },
   footerTitle: {
     fontSize: 12,
